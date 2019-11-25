@@ -73,15 +73,15 @@ class ClassFileGenerator extends Command
         $view = view('format');
 
         foreach ($classNames as $className) {
-            $view
-                ->with('namespace', $namespace)
-                ->with('classname', $className)
-                ->with('parent', $parent ? ' extends ' . $parent : '')
-                ->with('interface', $interface ? ' implements ' . $interface : '')
-                ->with('useClasses', $useClasses)
-                ->with('traitClasses', $traitClasses)
-                ->with('isStrict', $isStrict)
-                ;
+            $view->with([
+                'namespace'    =>  $namespace,
+                'classname'    =>  $className,
+                'parent'       =>  $parent ? ' extends ' . $parent : '',
+                'interface'    =>  $interface ? ' implements ' . $interface : '',
+                'useClasses'   =>  $useClasses,
+                'traitClasses' =>  $traitClasses,
+                'isStrict'     =>  $isStrict,
+            ]);
 
             // 頭に <?php をつけてphpファイルとして出力
             file_put_contents(
